@@ -1,17 +1,13 @@
 name: Auto Renew Mochi
 on:
   workflow_dispatch:
-
-  
 permissions:
   actions: write
   contents: read
-  
 jobs:
   renew:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    
     steps:
       - name: 📥 拉取私库脚本
         uses: actions/checkout@v4
@@ -40,6 +36,7 @@ jobs:
         env:
           MOCHI_ACCOUNT: ${{ secrets.MOCHI_ACCOUNT }}
           TG_BOT: ${{ secrets.TG_BOT }}
+          CRON_JOB: ${{ secrets.CRON_JOB }}
         run: |
           xvfb-run --auto-servernum python3 mochi_renew.py
 
